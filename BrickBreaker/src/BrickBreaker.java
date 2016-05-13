@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -29,12 +30,40 @@ public class BrickBreaker {
 	public void startGame() {
 
 	}
+}
 
-	class DrawPanel extends JPanel {
+class DrawPanel extends JPanel {
+	Brick brick1 = new Brick();
+	Brick brick2 = new Brick();
+	Brick brick3 = new Brick();
+	Brick brick4 = new Brick();
+	Brick brick5 = new Brick();
+	Brick brick6 = new Brick();
+	Brick brick7 = new Brick();
+	Brick brick8 = new Brick();
+	Brick brick9 = new Brick();
+	Brick brick10 = new Brick();
+	Brick brick11 = new Brick();
+	Brick brick12 = new Brick();
+	Brick brick13 = new Brick();
+	Brick brick14 = new Brick();
+	Brick brick15 = new Brick();
 
-		public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
+		brick1.setGraphics(g2d);
+		brick1.drawMe(0, 0);
+	}
+}
 
-		}
+class Brick {
+	Graphics2D g2d;
+
+	public void setGraphics(Graphics2D g) {
+		g2d = g;
 	}
 
+	public void drawMe(int x, int y) {
+		g2d.drawRect(x, y, 50, 20);
+	}
 }
