@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -33,26 +34,23 @@ public class BrickBreaker {
 }
 
 class DrawPanel extends JPanel {
-	Brick brick1 = new Brick();
-	Brick brick2 = new Brick();
-	Brick brick3 = new Brick();
-	Brick brick4 = new Brick();
-	Brick brick5 = new Brick();
-	Brick brick6 = new Brick();
-	Brick brick7 = new Brick();
-	Brick brick8 = new Brick();
-	Brick brick9 = new Brick();
-	Brick brick10 = new Brick();
-	Brick brick11 = new Brick();
-	Brick brick12 = new Brick();
-	Brick brick13 = new Brick();
-	Brick brick14 = new Brick();
-	Brick brick15 = new Brick();
+	ArrayList bricks = new<Brick> ArrayList();
 
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		brick1.setGraphics(g2d);
-		brick1.drawMe(0, 0);
+		for (int numBrick = 0; numBrick <= 20; numBrick++) {
+			bricks.add(new Brick());
+		}
+		for (int numBrick = 0; numBrick < bricks.size(); numBrick++) {
+			((Brick) bricks.get(numBrick)).setGraphics(g2d);
+		}
+		for (int numBrick = 0; numBrick < bricks.size(); numBrick++) {
+			for (int y = 0; y <= 100; y += 20) {
+				for (int x = 0; x <= 750; x += 50) {
+					((Brick) bricks.get(numBrick)).drawMe(x, y);
+				}
+			}
+		}
 	}
 }
 
