@@ -11,6 +11,8 @@ public class BrickBreaker {
 	DrawPanel drawPanel;
 	boolean up = false;
 	boolean down = false;
+	public int k = 400;
+	public int l = 675;
 
 	public static void main(String[] args) {
 		new BrickBreaker().makePanel();
@@ -31,37 +33,53 @@ public class BrickBreaker {
 	public void startGame() {
 
 	}
-}
 
-class DrawPanel extends JPanel {
-	ArrayList bricks = new<Brick> ArrayList();
+	class DrawPanel extends JPanel {
+		ArrayList<Brick> bricks = new ArrayList<Brick>();
+		Ball puck = new Ball();
 
-	public void paintComponent(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
-		for (int numBrick = 0; numBrick <= 20; numBrick++) {
-			bricks.add(new Brick());
-		}
-		for (int numBrick = 0; numBrick < bricks.size(); numBrick++) {
-			((Brick) bricks.get(numBrick)).setGraphics(g2d);
-		}
-		for (int numBrick = 0; numBrick < bricks.size(); numBrick++) {
-			for (int y = 0; y <= 100; y += 20) {
-				for (int x = 0; x <= 750; x += 50) {
-					((Brick) bricks.get(numBrick)).drawMe(x, y);
+		public void paintComponent(Graphics g) {
+			Graphics2D g2d = (Graphics2D) g;
+			for (int numBrick = 0; numBrick <= 20; numBrick++) {
+				bricks.add(new Brick());
+			}
+			for (int numBrick = 0; numBrick < bricks.size(); numBrick++) {
+				((Brick) bricks.get(numBrick)).setGraphics(g2d);
+			}
+			for (int numBrick = 0; numBrick < bricks.size(); numBrick++) {
+				for (int y = 0; y <= 100; y += 20) {
+					for (int x = 0; x <= 750; x += 50) {
+						((Brick) bricks.get(numBrick)).drawMe(x, y);
+					}
 				}
 			}
+			puck.setGraphics(g2d);
+			puck.drawMe(k, l);
+
 		}
 	}
-}
 
-class Brick {
-	Graphics2D g2d;
+	class Brick {
+		Graphics2D g2d;
 
-	public void setGraphics(Graphics2D g) {
-		g2d = g;
+		public void setGraphics(Graphics2D g) {
+			g2d = g;
+		}
+
+		public void drawMe(int x, int y) {
+			g2d.drawRect(x, y, 50, 20);
+		}
 	}
 
-	public void drawMe(int x, int y) {
-		g2d.drawRect(x, y, 50, 20);
+	class Ball {
+		Graphics2D g2d;
+
+		public void setGraphics(Graphics2D g) {
+			g2d = g;
+		}
+
+		public void drawMe(int x, int y) {
+			g2d.fillOval(x, y, 20, 20);
+		}
 	}
 }
