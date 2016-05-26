@@ -9,10 +9,12 @@ import javax.swing.JPanel;
 public class BrickBreaker {
 	JFrame frame;
 	DrawPanel drawPanel;
-	boolean up = false;
+	boolean up = true;
 	boolean down = false;
 	public int k = 400;
 	public int l = 675;
+	boolean right = true;
+	boolean left = false;
 
 	public static void main(String[] args) {
 		new BrickBreaker().makePanel();
@@ -31,7 +33,35 @@ public class BrickBreaker {
 	}
 
 	public void startGame() {
+		while (true) {
+			if (l >= 700) {
+				up = true;
+				down = false;
+			}
 
+			if (l <= 0) {
+				down = true;
+				up = false;
+			}
+
+			if (k <= 0) {
+				right = true;
+				left = false;
+			}
+
+			if (k >= 800) {
+				right = false;
+				left = true;
+			}
+			try {
+				Thread.sleep(10);
+				frame.repaint();
+
+			} catch (Exception exc) {
+
+			}
+
+		}
 	}
 
 	class DrawPanel extends JPanel {
