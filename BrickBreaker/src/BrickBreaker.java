@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ public class BrickBreaker {
 	public int l = 675;
 	boolean right = true;
 	boolean left = false;
+	Rectangle ball = new Rectangle(k,l,20,20);
 
 	public static void main(String[] args) {
 		new BrickBreaker().makePanel();
@@ -51,16 +53,17 @@ public class BrickBreaker {
 					}
 				}
 			}
+			
 			puck.setGraphics(g2d);
-			puck.drawMe(k, l);
-			while (true) {
+			puck.drawMe(ball.x, ball.y);
+			/*while (true) {
 				for (int numBrick = 0; numBrick < bricks.size(); numBrick++) {
 
 					if (((Brick) bricks.get(numBrick)).isHit()) {
 						bricks.remove(numBrick);
 					}
 				}
-			}
+			}*/
 
 
 		}
@@ -98,7 +101,7 @@ public class BrickBreaker {
 		}
 
 		public void drawMe(int x, int y) {
-			g2d.fillOval(x, y, 20, 20);
+			g2d.fillOval(x, y, ball.width, ball.height);
 		}
 	}
 
