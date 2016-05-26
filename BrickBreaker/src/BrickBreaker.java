@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 public class BrickBreaker {
 	JFrame frame;
 	DrawPanel drawPanel;
-	boolean up = true;
-	boolean down = false;
+	boolean up = false;
+	boolean down = true;
 	public int k = 400;
 	public int l = 675;
 	boolean right = true;
@@ -30,38 +30,6 @@ public class BrickBreaker {
 		frame.setSize(800, 800);
 		frame.setLocation(375, 55);
 		startGame();
-	}
-
-	public void startGame() {
-		while (true) {
-			if (l >= 700) {
-				up = true;
-				down = false;
-			}
-
-			if (l <= 0) {
-				down = true;
-				up = false;
-			}
-
-			if (k <= 0) {
-				right = true;
-				left = false;
-			}
-
-			if (k >= 800) {
-				right = false;
-				left = true;
-			}
-			try {
-				Thread.sleep(10);
-				frame.repaint();
-
-			} catch (Exception exc) {
-
-			}
-
-		}
 	}
 
 	class DrawPanel extends JPanel {
@@ -85,12 +53,23 @@ public class BrickBreaker {
 			}
 			puck.setGraphics(g2d);
 			puck.drawMe(k, l);
+			while (true) {
+				for (int numBrick = 0; numBrick < bricks.size(); numBrick++) {
+
+					if (((Brick) bricks.get(numBrick)).isHit()) {
+						bricks.remove(numBrick);
+					}
+				}
+			}
+
 
 		}
 	}
 
 	class Brick {
 		Graphics2D g2d;
+		int cox;
+		int coy;
 
 		public void setGraphics(Graphics2D g) {
 			g2d = g;
@@ -98,6 +77,16 @@ public class BrickBreaker {
 
 		public void drawMe(int x, int y) {
 			g2d.drawRect(x, y, 50, 20);
+			cox = x;
+			coy = y;
+		}
+
+		public boolean isHit() {
+			if ((k >= cox && k <= cox + 50) && (l >= coy && l <= coy + 20)) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 
@@ -110,6 +99,55 @@ public class BrickBreaker {
 
 		public void drawMe(int x, int y) {
 			g2d.fillOval(x, y, 20, 20);
+		}
+	}
+
+	public void startGame() {
+		while (true) {
+			if (l >= 700) {
+				up = true;
+				down = false;
+			}
+
+			if (l <= 0) {
+				down = true;
+				up = false;
+			}
+
+			if (k <= 0) {
+				right = true;
+				left = false;
+			}
+
+			if (k >= 800) {
+				right = false;
+				left = true;
+			}
+
+			if (up) {
+				l--;
+			}
+
+			if (down) {
+				l++;
+			}
+
+			if (left) {
+				k--;
+			}
+
+			if (right) {
+				k++;
+			}
+
+			try {
+				Thread.sleep(10);
+				frame.repaint();
+
+			} catch (Exception exc) {
+
+			}
+
 		}
 	}
 }
