@@ -16,7 +16,7 @@ public class BrickBreaker {
 	public int l = 675;
 	boolean right = true;
 	boolean left = false;
-	Rectangle ball = new Rectangle(k,l,20,20);
+	Rectangle ball = new Rectangle(k, l, 20, 20);
 
 	public static void main(String[] args) {
 		new BrickBreaker().makePanel();
@@ -53,18 +53,21 @@ public class BrickBreaker {
 					}
 				}
 			}
-			
+
+			for (int numBrick = 0; numBrick < bricks.size(); numBrick++) {
+
+			}
+
 			puck.setGraphics(g2d);
-			puck.drawMe(ball.x, ball.y);
-			/*while (true) {
-				for (int numBrick = 0; numBrick < bricks.size(); numBrick++) {
-
-					if (((Brick) bricks.get(numBrick)).isHit()) {
-						bricks.remove(numBrick);
-					}
-				}
-			}*/
-
+			puck.drawMe(k, l);
+			/*
+			 * while (true) { for (int numBrick = 0; numBrick < bricks.size();
+			 * numBrick++) {
+			 * 
+			 * if (bricks.get(numBrick) != null && ((Brick)
+			 * bricks.get(numBrick)).isHit()) { bricks.set(numBrick, null); } }
+			 * }
+			 */
 
 		}
 	}
